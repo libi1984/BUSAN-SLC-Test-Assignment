@@ -11,7 +11,7 @@ slc = reader[:]
 print(slc.dtype, slc.shape) # Shape shows row (range) and column (Azimuth) dimension
 
 #Overview Image in dB scale
-data_dB = 10 * np.log10(np.abs(slc))
+data_dB = 20 * np.log10(np.abs(slc))
 min_dB = np.min(data_dB)
 max_dB = np.max(data_dB)
 #print(f"Min dB: {min_dB}")
@@ -22,5 +22,5 @@ plt.xlabel('Azimuth')
 plt.ylabel('Range') 
 plt.yticks(np.arange(0, 5000, 1000)) 
 plt.colorbar(shrink=0.25)
-plt.clim(min_dB,max_dB)
+plt.clim(min_dB/2,max_dB/2)
 plt.show()
