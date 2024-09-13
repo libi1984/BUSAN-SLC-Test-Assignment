@@ -29,7 +29,7 @@ def fig_change(axis, image, color_limit, fig_shrink, title, x_label, y_label, x_
         cbar =fig.colorbar(image, ax=axis,shrink=fig_shrink)
         cbar.set_label('Power (dB)')
 
-#Folders for SLC data and Plots
+#Create Folders for SLC data and Plots
 data_folder = "SLC_data"    #SICD SLC data folder
 save_folder = "Saved_Plots" #Saved Plots
 
@@ -73,7 +73,7 @@ fig_change(axis=ax1, image=im1, title='StrixB:Stripmap dataset of Busan(Original
             x_label='Azimuth', y_label='Range',
             y_ticks_ticks=np.arange(0, 5000, 1000), 
             color_limit=color_limit, fig_shrink=0.25)
-#oFiltered data
+#Filtered data
 im2=plt.imshow(20 * np.log10(np.abs(window_data)), cmap='bone')
 fig_change(axis=ax2, image=im2, title='StrixB:Stripmap dataset of Busan(Filtered)', 
             x_label='Azimuth', y_label='Range',
@@ -96,6 +96,8 @@ fig_change(axis=ax3, image=im3, title='StrixB:Stripmap dataset of Busan Harbor(O
             x_ticks_ticks=np.arange(0, az_end - az_st, step=200), x_ticks_labels=np.arange(az_st, az_end, step=200),
             y_ticks_ticks=np.arange(0, range_end - range_st, step=200), y_ticks_labels=np.arange(range_st, range_end, step=200),
             color_limit=color_limit, fig_shrink=1)
+print(f"Min dB_Bu_Org: {np.min(20 * np.log10(np.abs(zoomed_data_org)))}")
+print(f"Max dB_Bu_Org: {np.max(20 * np.log10(np.abs(zoomed_data_org)))}")
 #Zommed plot of Filtered Data
 im4=plt.imshow(20 * np.log10(np.abs(zoomed_data_Filt)), cmap='bone')
 fig_change(axis=ax4, image=im4, title='StrixB:Stripmap dataset of Busan Harbor(Filtered)', 
@@ -103,5 +105,7 @@ fig_change(axis=ax4, image=im4, title='StrixB:Stripmap dataset of Busan Harbor(F
             x_ticks_ticks=np.arange(0, az_end - az_st, step=200), x_ticks_labels=np.arange(az_st, az_end, step=200),
             y_ticks_ticks=np.arange(0, range_end - range_st, step=200), y_ticks_labels=np.arange(range_st, range_end, step=200),
             color_limit=color_limit, fig_shrink=1)
+print(f"Min dB_Bu_Post: {np.min(20 * np.log10(np.abs(zoomed_data_Filt)))}")
+print(f"Max dB_Bu_Post: {np.max(20 * np.log10(np.abs(zoomed_data_Filt)))}")
 #Save the Busan Harbor Data Figure
 plt.savefig(concat_date_file_path('StrixB_data_Busan_Harbor_zoomed_Original_and_Filtered.png'))
